@@ -65,6 +65,10 @@ class CBPCrmCopyLeadActivity extends CBPActivity
 
             // Возвращаем ID нового лида в RETURN
             $this->NewLeadId = $newLeadId;
+
+            // Автозапуск роботов после создания сущности на соответствующей стадии
+            $starter = new \Bitrix\Crm\Automation\Starter(\CCrmOwnerType::Lead, $newLeadId);
+            $starter->runOnAdd();
         }
 
         return CBPActivityExecutionStatus::Closed;
